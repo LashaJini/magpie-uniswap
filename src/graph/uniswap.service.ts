@@ -1,20 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { gql, GraphQLClient } from 'graphql-request';
 import { Pool } from './uniswap/schema/pool/pool.schema';
-import { gql } from 'graphql-request';
-import axios, { AxiosResponse } from 'axios';
 
 @Injectable()
 export class UniswapService {
+  private readonly logger = new Logger(UniswapService.name);
+  private readonly graphqlClient: GraphQLClient;
   private apiURL: string;
 
-  constructor(private readonly configService: ConfigService) {
-    this.apiURL = this.configService.getOrThrow("UNISWAP_ENDPOINT")
-  }
-
-  async findPoolByID(id: string): Promise<Pool> {
-    const query = gql`
-      query ($id: String) {
+  private static readonly POOL_QUERY = gql`
+      query ($id: String!) {
         pool(id: $id){
           ticks{
             id
@@ -37,19 +33,25 @@ export class UniswapService {
           liquidity
         }
       }
-    `
+    `;
 
-    const variables = { id }
+  constructor(private readonly configService: ConfigService) {
+    this.apiURL = this.configService.getOrThrow("UNISWAP_ENDPOINT")
+    this.graphqlClient = new GraphQLClient(this.apiURL);
+  }
 
+  async findPoolByID(id: string): Promise<Pool | null> {
     try {
-      const response: AxiosResponse = await axios.post(
-        this.apiURL,
-        { query, variables },
-      );
+      const response = await this.graphqlClient.request<{ pool: Pool | null }>(UniswapService.POOL_QUERY, { id });
 
-      return response.data?.data?.pool;
+      if (!response.pool) {
+        this.logger.warn(`No pool found with ID: ${id}`);
+        return null;
+      }
+
+      return response.pool;
     } catch (error) {
-      console.log("oops", error)
+      this.logger.error(`Failed to fetch pool with ID: ${id}`, error);
       throw error;
     }
   }
