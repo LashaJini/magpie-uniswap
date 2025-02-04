@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UniswapModule } from './graph/uniswap.module';
 import { ConfigModule } from '@nestjs/config';
+import { DatabaseService } from './storage/database/database.service';
+import { DatabaseModule } from './storage/database/database.module';
 
 @Module({
   imports: [
@@ -11,8 +13,9 @@ import { ConfigModule } from '@nestjs/config';
       envFilePath: '.env',
     }),
     UniswapModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DatabaseService],
 })
 export class AppModule { }

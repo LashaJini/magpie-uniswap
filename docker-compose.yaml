@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:17.2
+    container_name: postgres17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: a
+      POSTGRES_DB: magpie_pools
+      POSTGRES_USER: jini
+    volumes:
+      - ./postgres-data-dev:/var/lib/postgresql/data
+    networks:
+      - magpie-pools-network
+
+networks:
+  magpie-pools-network:

@@ -1,0 +1,7 @@
+##
+
+# @name database health check
+GET http://localhost:3000/database/health
+accept: application/json
+content-type: application/json
+
