@@ -14,7 +14,12 @@ CREATE TABLE IF NOT EXISTS tick (
 CREATE TABLE IF NOT EXISTS pool (
   id TEXT PRIMARY KEY,
   fee_tier BIGINT NOT NULL,
-  sqrt_price BIGINT NOT NULL,
+
+  -- according to https://github.com/Uniswap/v3-subgraph/blob/main/schema.graphql#L93
+  -- type of sqrtPrice is BigInt in graphql schema, however
+  -- it seems that it's larger than postgres' BIGINT type. Thus, the NUMERIC type.
+  sqrt_price NUMERIC NOT NULL,
+
   liquidity BIGINT NOT NULL,
   token0_id TEXT NOT NULL REFERENCES token(id) ON DELETE CASCADE,
   token1_id TEXT NOT NULL REFERENCES token(id) ON DELETE CASCADE

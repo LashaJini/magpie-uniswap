@@ -31,6 +31,7 @@ export class UniswapService {
           feeTier
           sqrtPrice
           liquidity
+          id
         }
       }
     `;
