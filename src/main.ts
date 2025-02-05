@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 import * as dotenvExpand from 'dotenv-expand';
 
 // Load and expand environment variables
-dotenvExpand.expand(dotenv.config());
+dotenvExpand.expand(dotenv.config({ path: ".env.prod" }));
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
