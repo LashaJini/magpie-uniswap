@@ -13,7 +13,7 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   constructor(private configService: ConfigService) {
     this.pool = new Pool({
       user: this.configService.getOrThrow("DB_USER"),
-      host: this.configService.getOrThrow("DB_HOST"),
+      host: this.configService.get("DB_HOST") ?? "localhost",
       database: this.configService.getOrThrow("DB_NAME"),
       password: this.configService.getOrThrow("DB_PASS"),
       port: this.configService.getOrThrow("DB_PORT"),

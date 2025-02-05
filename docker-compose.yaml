@@ -17,6 +17,8 @@ services:
     build:
       context: .
       dockerfile: ./cli/Dockerfile
+    environment:
+      DB_HOST: postgres
     volumes:
       - ./src/storage/database/migrations/:/app/src/storage/database/migrations
     networks:
