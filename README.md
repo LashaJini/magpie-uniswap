@@ -81,6 +81,8 @@ pnpm start
 - `src/graph` modules handling subgraphs
 - `src/storage/database` postgresql module for initializing and quering
 
+![flowchart](./assets/flowchart.svg)
+
 ### Why SQL scripts instead of ORM? (I may be a little be biased)
 
 While ORMs provide abstractions, I chose raw SQL scripts because:
@@ -102,6 +104,8 @@ Didn't want to re-invent the wheel. And as the user may not have installed golan
 - `tick` stores tick price data
 - `pool` represents liquidity pool with associated tokens and ticks
 - `pool_tick` join table for pools and ticks
+
+![database structure](./assets/db_structure.png)
 
 Due of my limited knowledge of cryptocurreny and blockchain, I was not sure which fields were essential for price calculations. However, database structure is easily extendable, as well as corresponding service functions.
 
