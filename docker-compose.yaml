@@ -19,6 +19,7 @@ services:
       dockerfile: ./cli/Dockerfile
     environment:
       DB_HOST: postgres
+    user: "1000:1000"
     volumes:
       - ./src/storage/database/migrations/:/app/src/storage/database/migrations
     networks:
