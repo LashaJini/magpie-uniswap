@@ -13,5 +13,16 @@ services:
     networks:
       - magpie-pools-network
 
+  cli:
+    build:
+      context: .
+      dockerfile: ./cli/Dockerfile
+    volumes:
+      - ./src/storage/database/migrations/:/app/src/storage/database/migrations
+    networks:
+      - magpie-pools-network
+    depends_on:
+      - postgres
+
 networks:
   magpie-pools-network:

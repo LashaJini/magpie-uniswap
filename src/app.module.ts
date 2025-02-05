@@ -10,7 +10,7 @@ import { DatabaseModule } from './storage/database/database.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
+      envFilePath: '.env.prod',
     }),
     UniswapModule,
     DatabaseModule,
