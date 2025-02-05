@@ -63,7 +63,7 @@ cp .env.example .env.prod
 # Install dependencies
 pnpm i
 
-# Start containers (postgres and cli, explained below)
+# Build containers (postgres, cli) and start postgres container
 docker compose up --build -d
 
 # Run database migrations
@@ -72,6 +72,9 @@ pnpm migrate --up 0
 # Start the project
 # Will fetch pool data from Uniswap and sync it with database every 30 minutes
 pnpm start
+
+# When finished stop the containers
+docker compose down
 ```
 
 ### Project Architecture. Monolith
@@ -116,3 +119,5 @@ Due of my limited knowledge of cryptocurreny and blockchain, I was not sure whic
 - Enhanced logging (file output maybe, Grafana, log level, etc)
 - Reduced coupling between modules
 - Hardcoded Uniswap id when searching pool. User should be able to pass any id.
+- create indexes on foreign keys
+- uuid/serial instead ids on tables; move 3rd party generated ids to another field
