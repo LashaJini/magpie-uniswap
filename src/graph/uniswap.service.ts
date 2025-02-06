@@ -1,11 +1,12 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { gql, GraphQLClient } from 'graphql-request';
+import { CustomLogger } from '../common/logger/custom-logger.service';
 import { Pool } from './uniswap/schema/pool/pool.schema';
 
 @Injectable()
 export class UniswapService {
-  private readonly logger = new Logger(UniswapService.name);
+  private readonly logger = new CustomLogger(UniswapService.name);
   private readonly graphqlClient: GraphQLClient;
   private apiURL: string;
 
