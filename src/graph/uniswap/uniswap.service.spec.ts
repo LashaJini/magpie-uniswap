@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UniswapService } from './uniswap.service';
 import { GraphQLClient } from 'graphql-request';
 import { ConfigService } from '@nestjs/config';
-import { Pool } from './uniswap/schema/pool/pool.schema';
-import { Tick } from './uniswap/schema/tick/tick.schema';
+import { Tick } from './schema/tick/tick.schema';
+import { Pool } from './schema/pool/pool.schema';
+import { UniswapService } from './uniswap.service';
 
 jest.mock('graphql-request');
 

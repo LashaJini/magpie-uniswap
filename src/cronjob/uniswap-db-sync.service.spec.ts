@@ -1,4 +1,4 @@
-import { UniswapService } from "../graph/uniswap.service";
+import { UniswapService } from "../graph/uniswap/uniswap.service";
 import { UniswapDbSyncService } from "./uniswap-db-sync.service";
 import { DatabaseService } from "../storage/database/database.service";
 import { Test, TestingModule } from "@nestjs/testing";

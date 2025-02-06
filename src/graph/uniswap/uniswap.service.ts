@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { gql, GraphQLClient } from 'graphql-request';
-import { CustomLogger } from '../common/logger/custom-logger.service';
-import { Pool } from './uniswap/schema/pool/pool.schema';
-import { Tick } from './uniswap/schema/tick/tick.schema';
+import { CustomLogger } from '../../common/logger/custom-logger.service';
+import { Pool } from './schema/pool/pool.schema';
+import { Tick } from './schema/tick/tick.schema';
 
 @Injectable()
 export class UniswapService {
