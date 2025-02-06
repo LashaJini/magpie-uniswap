@@ -18,6 +18,7 @@ describe('UniswapDbSyncService', () => {
           provide: UniswapService,
           useValue: {
             findPoolByID: jest.fn(),
+            fetchTicksInBatches: jest.fn(),
           },
         },
         {

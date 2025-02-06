@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Cron } from '@nestjs/schedule';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { CustomLogger } from '../common/logger/custom-logger.service';
 import { UniswapService } from '../graph/uniswap.service';
 import { DatabaseService } from '../storage/database/database.service';
@@ -13,7 +13,7 @@ export class UniswapDbSyncService {
     private uniswapService: UniswapService
   ) { }
 
-  @Cron("0 */30 * * * *")
+  @Cron(CronExpression.EVERY_30_MINUTES)
   async handleCron() {
     this.logger.log("Starting cron job for Uniswap DB synchronization");
 
@@ -21,6 +21,8 @@ export class UniswapDbSyncService {
     const pool = await this.uniswapService.findPoolByID(id)
 
     if (pool) {
+      const ticks = await this.uniswapService.fetchTicksInBatches(id)
+      pool.ticks = ticks ?? []
       await this.databaseService.insertPoolWithTicksAndTokens(pool);
     }
   }
