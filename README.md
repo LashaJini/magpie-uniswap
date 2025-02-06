@@ -121,3 +121,4 @@ Due of my limited knowledge of cryptocurreny and blockchain, I was not sure whic
 - Hardcoded Uniswap id when searching pool. User should be able to pass any id.
 - create indexes on foreign keys
 - uuid/serial instead ids on tables; move 3rd party generated ids to another field
+- storage -> repository; `InjectRepository`

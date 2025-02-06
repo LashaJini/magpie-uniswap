@@ -1,11 +1,12 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { CustomLogger } from '../common/logger/custom-logger.service';
 import { UniswapService } from '../graph/uniswap.service';
 import { DatabaseService } from '../storage/database/database.service';
 
 @Injectable()
 export class UniswapDbSyncService {
-  private readonly logger = new Logger(UniswapDbSyncService.name)
+  private readonly logger = new CustomLogger(UniswapDbSyncService.name)
 
   constructor(
     private databaseService: DatabaseService,

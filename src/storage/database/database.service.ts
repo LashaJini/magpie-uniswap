@@ -1,16 +1,17 @@
-import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Pool, PoolClient } from 'pg';
+import { CustomLogger } from '../../common/logger/custom-logger.service';
+import { PoolTickInsertDTO } from './dtos/pool-tick-insert.dto';
+import { PoolUpsertDTO } from './dtos/pool-upsert.dto';
+import { PoolWithTicksAndTokensDTO } from './dtos/pool-with-ticks-and-tokens.dto';
 import { TickUpsertDTO } from './dtos/tick-upsert.dto';
 import { TokenInsertDTO } from './dtos/token-insert.dto';
-import { PoolUpsertDTO } from './dtos/pool-upsert.dto';
-import { PoolTickInsertDTO } from './dtos/pool-tick-insert.dto';
-import { PoolWithTicksAndTokensDTO } from './dtos/pool-with-ticks-and-tokens.dto';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   private static initialized = false;
-  private readonly logger = new Logger(DatabaseService.name);
+  private readonly logger = new CustomLogger(DatabaseService.name);
   private readonly maxRetries = 3;
   private readonly retryDelayMilliSeconds = 2000;
   private pool: Pool;
