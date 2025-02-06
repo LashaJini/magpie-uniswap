@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
-import { UniswapService } from 'src/graph/uniswap.service';
-import { DatabaseService } from 'src/storage/database/database.service';
+import { UniswapService } from '../graph/uniswap.service';
+import { DatabaseService } from '../storage/database/database.service';
 
 @Injectable()
 export class UniswapDbSyncService {
