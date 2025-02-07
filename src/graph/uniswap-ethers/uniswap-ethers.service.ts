@@ -41,10 +41,8 @@ export class UniswapEthersService {
     const tickSpacing = Number(await this.poolContract.tickSpacing());
     const tickIndices: number[] = []
 
-    // const minWord = this.tickToWord(-887272, tickSpacing)
-    // const maxWord = this.tickToWord(887272, tickSpacing)
-    const minWord = -100
-    const maxWord = 100
+    const minWord = this.tickToWord(-887272, tickSpacing)
+    const maxWord = this.tickToWord(887272, tickSpacing)
 
     let calls: any[] = []
     let wordPosIndices: number[] = []
