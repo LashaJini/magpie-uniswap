@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UniswapModule } from 'src/graph/uniswap/uniswap.module';
+import { UniswapEthersModule } from 'src/graph/uniswap-ethers/uniswap-ethers.module';
 import { DatabaseModule } from 'src/storage/database/database.module';
 import { UniswapDbSyncService } from './uniswap-db-sync.service';
 
 @Module({
   imports: [
     DatabaseModule,
-    UniswapModule,
+    UniswapEthersModule,
   ],
   providers: [UniswapDbSyncService],
   exports: [UniswapDbSyncService]

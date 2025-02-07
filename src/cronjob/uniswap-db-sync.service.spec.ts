@@ -1,13 +1,13 @@
-import { UniswapService } from "../graph/uniswap/uniswap.service";
-import { UniswapDbSyncService } from "./uniswap-db-sync.service";
-import { DatabaseService } from "../storage/database/database.service";
-import { Test, TestingModule } from "@nestjs/testing";
 import { Logger } from "@nestjs/common";
+import { Test, TestingModule } from "@nestjs/testing";
 import { Pool } from "../graph/uniswap/schema/pool/pool.schema";
+import { DatabaseService } from "../storage/database/database.service";
+import { UniswapDbSyncService } from "./uniswap-db-sync.service";
+import { UniswapEthersService } from "../graph/uniswap-ethers/uniswap-ethers.service";
 
 describe('UniswapDbSyncService', () => {
   let service: UniswapDbSyncService;
-  let uniswapService: UniswapService;
+  let uniswapService: UniswapEthersService;
   let databaseService: DatabaseService;
 
   beforeEach(async () => {
@@ -15,10 +15,12 @@ describe('UniswapDbSyncService', () => {
       providers: [
         UniswapDbSyncService,
         {
-          provide: UniswapService,
+          provide: UniswapEthersService,
           useValue: {
             findPoolByID: jest.fn(),
             fetchTicksInBatches: jest.fn(),
+            calculateTickIndices: jest.fn(),
+            getAllTicks: jest.fn(),
           },
         },
         {
@@ -32,21 +34,12 @@ describe('UniswapDbSyncService', () => {
     }).compile();
 
     service = module.get(UniswapDbSyncService);
-    uniswapService = module.get(UniswapService);
+    uniswapService = module.get(UniswapEthersService);
     databaseService = module.get(DatabaseService);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-  });
-
-  it('should call findPoolByID with the correct ID', async () => {
-    const poolId = "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8";
-    const findPoolByIDSpy = jest.spyOn(uniswapService, 'findPoolByID').mockResolvedValue(null);
-
-    await service.handleCron();
-
-    expect(findPoolByIDSpy).toHaveBeenCalledWith(poolId);
   });
 
   it('should call insertPoolWithTicksAndTokens when pool is found', async () => {

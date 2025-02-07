@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UniswapModule } from './graph/uniswap/uniswap.module';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseService } from './storage/database/database.service';
-import { DatabaseModule } from './storage/database/database.module';
-import { UniswapDbSyncService } from './cronjob/uniswap-db-sync.service';
-import { UniswapDbSyncModule } from './cronjob/uniswap-db-sync.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { UniswapDbSyncModule } from './cronjob/uniswap-db-sync.module';
+import { UniswapDbSyncService } from './cronjob/uniswap-db-sync.service';
+import { UniswapEthersModule } from './graph/uniswap-ethers/uniswap-ethers.module';
+import { UniswapModule } from './graph/uniswap/uniswap.module';
+import { DatabaseModule } from './storage/database/database.module';
+import { DatabaseService } from './storage/database/database.service';
 
 @Module({
   imports: [
@@ -15,8 +16,10 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     ScheduleModule.forRoot(),
     UniswapModule,
+    UniswapEthersModule,
     DatabaseModule,
     UniswapDbSyncModule,
+    UniswapEthersModule,
   ],
   controllers: [],
   providers: [DatabaseService, UniswapDbSyncService],
