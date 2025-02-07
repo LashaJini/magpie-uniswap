@@ -77,6 +77,10 @@ pnpm start
 docker compose down
 ```
 
+**Above steps are demonstrated in the video**
+
+[](https://github.com/user-attachments/assets/5ee0b557-b7ae-41f4-bceb-9916aeab99dc)
+
 ### Project Architecture. Monolith
 
 - `cli` database migration scripts
