@@ -79,7 +79,10 @@ docker compose down
 
 **Above steps are demonstrated in the video**
 
-[](https://github.com/user-attachments/assets/5ee0b557-b7ae-41f4-bceb-9916aeab99dc)
+> [!NOTE]
+> I've decreased min/max word range for demonstration purposes
+
+[](https://github.com/user-attachments/assets/be44253f-e625-4d24-ba20-fff2d4b22a50)
 
 ### Project Architecture. Monolith
 
@@ -115,6 +118,10 @@ Didn't want to re-invent the wheel. And as the user may not have installed golan
 ![database structure](./assets/db_structure.png)
 
 Due of my limited knowledge of cryptocurreny and blockchain, I was not sure which fields were essential for price calculations. However, database structure is easily extendable, as well as corresponding service functions.
+
+### Insights and Thoughts about the Bonus (using ethers)
+
+After reading a little bit of the Uniswap documentation, how they are calculating ticks and sending requests to ethereum blockchain, I've realized that I'm missing important database fields, and some are even redundant!
 
 ### Future Improvements
 
