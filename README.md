@@ -28,7 +28,7 @@ Develop a NestJS backend application in TypeScript that periodically fetches dat
 
 #### Bonus
 
-- [ ] Instead of GraphQL, collect data from the ethereum blockchain using the ethers library.
+- [x] Instead of GraphQL, collect data from the ethereum blockchain using the ethers library.
 - [x] The solution is performance optimised and scalable from database and NestJS side also.
 - [x] Attention to details concerning concurrency issues.
 - [x] Add unit tests.
