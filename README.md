@@ -119,6 +119,15 @@ Due of my limited knowledge of cryptocurreny and blockchain, I was not sure whic
 - Enhanced logging (file output maybe, Grafana, log level, etc)
 - Reduced coupling between modules
 - Hardcoded Uniswap id when searching pool. User should be able to pass any id.
-- create indexes on foreign keys
-- uuid/serial instead ids on tables; move 3rd party generated ids to another field
-- storage -> repository; `InjectRepository`
+- Create indexes on foreign keys
+- Uuid/serial instead ids on tables; move 3rd party generated ids to another field
+- Storage -> repository; `InjectRepository`
+- Organize tests better
+- Read uniswap docs
+- `feat/ethers` graceful shutdown of possibly hanging requests to alchemy api
+- `feat/ethers` cheating by converting BigInts to Numbers. Don't
+- `feat/ethers` magic number `887272`
+- `feat/ethers` compared to uniswap's graphql solution, mine is slower, takes way more time (approx. 15 mins), does not fetch all ticks
+- `feat/ethers` is there efficient way to calculate min/max words?
+- `feat/ethers` try out alchemy npm package
+- `feat/ethers` burst logger
